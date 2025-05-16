@@ -19,7 +19,7 @@ def get_and_format_search_results(query, k):
 
 # Gradio interface
 with gr.Blocks(title="Search Engine") as web_ui:
-    gr.Markdown("Search Engine")
+    gr.Markdown("# Search Engine")
     SE = SearchEngine()
     with gr.Row():
         with gr.Column(scale=4):
