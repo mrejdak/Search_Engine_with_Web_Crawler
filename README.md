@@ -16,7 +16,7 @@ pip install -r requirements.txt
 ### Running the Project
 
 Web crawler is located (for now) in the jupyter notebook WebCrawler.ipynb. To run it, execute all cells in the notebook, following the instructions in it.  
-_Files [documents.json](documents.json),[terms](terms.json), [terms_by_doc.npz](terms_by_doc.npz) already contain indexed data from 10000 wikipedia pages._
+_Files [documents.json](documents.json), [terms](terms.json), [terms_by_doc.npz](terms_by_doc.npz) already contain indexed data from 10000 wikipedia pages._
 
 To run the search engine:
 
@@ -57,7 +57,7 @@ As we can see, lower k values remove a lot of information leading to more genera
 | Computing (0.426)                    | Computability_theory (0.944)         | Computability_theory (0.880)         | Computation (0.737)                  | Computation (0.690)                  |
 | Computers (0.407)                    | Debugging (0.935)                    | Distributed_computing (0.863)        | Computer_vision (0.719)              | Computer_vision (0.661)              |
 
-This time, when provided with much simpler query, all tested values of k provide quite similar results.
+This time, when provided with much simpler query, all tested values of k give quite similar results.
 
 ## Conclusions
 
