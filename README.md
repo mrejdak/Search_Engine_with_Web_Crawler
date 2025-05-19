@@ -31,24 +31,38 @@ and click on the local URL.
 
 The performance and relevance of results can vary with the number of components `k` used in Truncated SVD. Below is a comparison of search results with different `k` values.
 
+These results were acquired from 10000 documents containing 51435 different words.
+Queries for k equal 250 and 500 were carried out using ANN and the rest - using cosine similarity.
+
 ```query```: `bloody war in middle ages`
 
-| k=0                       | k=50                      | k=100                     | k=250                     |
-|---------------------------|---------------------------|---------------------------|---------------------------|
-| High_Middle_Ages (0.415)  | Early_Middle_Ages (0.817) | High_Middle_Ages (0.752)  | High_Middle_Ages (0.884)  |
-| Early_Middle_Ages (0.345) | High_Middle_Ages (0.814)  | Early_Middle_Ages (0.743) | Early_Middle_Ages (0.739) |
-| Middle_Ages (0.287)       | Modern_History (0.779)    | Medieval_warfare (0.689)  | Medieval (0.627)          |
-| Medieval (0.287)          | Licinius (0.760)          | Medieval (0.689)          | Medieval_warfare (0.627)  |
-| Medieval_warfare (0.287)  | Medieval_warfare (0.756)  | Middle_Ages (0.689)       | Middle_Ages (0.627)       |
+| k=0                       | k=50                      | k=100                        | k=250                        | k=500                     |
+|---------------------------|---------------------------|------------------------------|------------------------------|---------------------------|
+| High_Middle_Ages (0.279)  | Peter_I_of_Russia (0.885) | World_War_I (0.794)          | High_Middle_Ages (0.686)     | High_Middle_Ages (0.730)  |
+| Early_Middle_Ages (0.232) | World_War_I (0.877)       | World_War_II (0.758)         | Early_Middle_Ages (0.604)    | Early_Middle_Ages (0.625) |
+| Middle_Ages (0.203)       | Nazi_Germany (0.857)      | Nazi_Germany (0.753)         | Warfare (0.603)              | Middle_Ages (0.570)       |
+| Medieval (0.203)          | World_War_II (0.838)      | Peter_I_of_Russia (0.748)    | Conventional_warfare (0.571) | Medieval_warfare (0.570)  |
+| Medieval_warfare (0.203)  | Anglo-Dutch_War (0.836)   | Conventional_warfare (0.748) | Middle_Ages (0.545)          | Medieval (0.570)          |
+
+As we can see, lower k values remove a lot of information leading to more general results concerning war, while higher values return results focused on middle ages. Another thing to consider is rather small batch of documents this query was performed on, which might be the reason for lower accuracy of results.
 
 ---
 ```query```: `computer science`
 
-| k=0                                  | k=50                                 | k=100                                | k=250                                |
-|--------------------------------------|--------------------------------------|--------------------------------------|--------------------------------------|
-| Theoretical_computer_science (0.545) | Theoretical_computer_science (0.982) | Theoretical_computer_science (0.963) | Theoretical_computer_science (0.933) |
-| Natural_sciences (0.432)             | Computing (0.951)                    | Computer_science (0.918)             | Computing (0.829)                    |
-| Computer_science (0.426)             | Computer_science (0.951)             | Computing (0.918)                    | Computer_science (0.829)             |
-| Computing (0.462)                    | Computability_theory (0.944)         | Computability_theory (0.880)         | Computation (0.737)                  |
-| Computers (0.407)                    | Debugging (0.935)                    | Distributed_computing (0.863)        | Computer_vision (0.719)              |
+| k=0                                  | k=50                                 | k=100                                | k=250                                | k = 500                              |
+|--------------------------------------|--------------------------------------|--------------------------------------|--------------------------------------|--------------------------------------|
+| Theoretical_computer_science (0.545) | Theoretical_computer_science (0.982) | Theoretical_computer_science (0.963) | Theoretical_computer_science (0.933) | Theoretical_computer_science (0.920) |
+| Natural_sciences (0.432)             | Computing (0.951)                    | Computer_science (0.918)             | Computing (0.829)                    | Computer_science (0.703)             |
+| Computer_science (0.426)             | Computer_science (0.951)             | Computing (0.918)                    | Computer_science (0.829)             | Computing (0.703)                    |
+| Computing (0.426)                    | Computability_theory (0.944)         | Computability_theory (0.880)         | Computation (0.737)                  | Computation (0.690)                  |
+| Computers (0.407)                    | Debugging (0.935)                    | Distributed_computing (0.863)        | Computer_vision (0.719)              | Computer_vision (0.661)              |
 
+This time, when provided with much simpler query, all tested values of k provide quite similar results.
+
+## Conclusions
+
+The number of components used in SVD (k) significantly influences the relevance and specificity of search results of more advanced queries.
+Lower values (e.g., k=50) tend to generalize those queries, often returning loosely related topics.
+For simpler queries, SVD does not have much influence on the results.
+
+Approximate Nearest Neighbors (ANN) search method did not provide any significant time improvements, however this is probably due to the small dataset that those tests were concluded on.
