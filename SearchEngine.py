@@ -102,8 +102,7 @@ class SearchEngine:
             if k != self.k:
                 raw_reduced_matrix, self.svd = self._reduce_svd_matrix(k)
                 self.reduced_matrix = normalize(raw_reduced_matrix, norm='l2', axis=1).T
-                if ann:
-                    self.p = self._get_ann_index(k)
+                self.p = self._get_ann_index(k)
                 self.k = k
             reduced_query = self.svd.transform(query.T)
             reduced_query = normalize(reduced_query, norm='l2', axis=1).T
