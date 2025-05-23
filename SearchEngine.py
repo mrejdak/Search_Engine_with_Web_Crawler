@@ -21,13 +21,13 @@ def cosine_similarity_normalized(q, A):
     dot_product = q.T @ A
     return dot_product
 
-def tf_idf(matrix):
-    mat = matrix.copy()
-    cnt_mat = mat.count_nonzero(axis=1)
-    for i in range(len(cnt_mat)):
-        if cnt_mat[i] != 0:
-            mat[i] *= np.log(mat.shape[1] / cnt_mat[i])
-    return mat
+# def tf_idf(matrix):
+#     mat = matrix.copy()
+#     cnt_mat = mat.count_nonzero(axis=1)
+#     for i in range(len(cnt_mat)):
+#         if cnt_mat[i] != 0:
+#             mat[i] *= np.log(mat.shape[1] / cnt_mat[i])
+#     return mat
 
 
 class SearchEngine:
@@ -73,7 +73,7 @@ class SearchEngine:
         except FileNotFoundError:
             p = hnswlib.Index(space='cosine', dim=self.reduced_matrix.shape[0])
             p.init_index(max_elements=self.reduced_matrix.shape[1])
-            p.set_ef(100)
+            p.set_ef(50)
             p.add_items(self.reduced_matrix.T)
             with open(index_file, 'wb') as file:
                 pickle.dump(p, file)
